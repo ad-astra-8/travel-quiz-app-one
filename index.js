@@ -184,7 +184,7 @@ function wrongAnswer(){
             <img src="images/giphy-wrong.gif" alt="" class="failure-image"></img>
             <button type="button" class="nextButton button">Next</button>`
             );
-
+}
 
   // Upon CLICK on SUBMIT, this function will display TEXTUAL + VISUAL feedback. 
   // IF incorrect, will DISPLAY correct answer.
@@ -194,7 +194,7 @@ function handleAnswers(){
         $('.feedback').show();
         feedbackQuestionAndScore();
         let correct = STORE[questionNumber].correctAnswer;
-        if (answer === correct) {
+        if (answer === correct){
         goodAnswer();
         }else{
         wrongAnswer();
@@ -205,9 +205,8 @@ function handleAnswers(){
   //this function generates the next question when user CLICK on button "NEXT"
   //and render the next question on the form
 function nextQuestion(){
-    $('#submit').on('click', function(event){
-    });
-
+    // $('#submit').on('click', function(event){
+    // });
 }
 
   //this function generate overall score and feedback at the end of the quiz.
@@ -217,9 +216,8 @@ function finalScore(){
 
   //this function bring back that starting page when CLICK START AGAIN.
 function restartQuiz(){
-    $('#start').on('click', function(event){
-
-    });
+//     $('#start').on('click', function(event){
+// });
 }
 
 
