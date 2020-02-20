@@ -1,6 +1,7 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
+
 body {
   /* background-image:url("https://www.wallpaperflare.com/static/47/927/617/beach-holiday-sea-summer-wallpaper.jpg"); */
   background-size: cover;
@@ -62,6 +63,3 @@ ul {
   padding: 0;
 }
 
-li {
-  list-style: none;
-}
