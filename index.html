@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel quiz app</title>
+    <link rel="stylesheet" type="text/css" href="index.css" />
+</head>
+<body>
+    <main class="container">
+        <header role="banner" class="header">
+            <h1>Travel Quiz</h1>
+            <p>Question: <span class="questionNumber">0</span>/10</p>
+            <p>Score: <span class="questionNumber">0</span></p>
+        </header>
+
+
+        <section class="intro">   
+            <h2>Do you know your geography?</h2> 
+            <!-- <a href="questions.html">Start</a> -->
+            <button type="button" id="start">Start</button>
+        </section>
+        
+        <section class="questions">
+            <form class="form" action="" method ="get">
+                <legend>What ocean is Bora Bora in?</legend>
+            
+                <fieldset>
+                 <ul class="question-template js-question-template">
+                    <li>
+                        <label class="option" for="answer">
+                        <input class="radio" type="radio" id="answer" value="answerValue" name="answer" required>
+                        <span>Pacific Ocean</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="option" for="answer">
+                        <input class="radio" type="radio" id="answer" value="answerValue" name="answer" required>
+                        <span>Atlantic Ocean</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="option" for="answer">
+                        <input class="radio" type="radio" id="answer" value="answerValue" name="answer" required>
+                        <span>Arctic Ocean</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="option" for="answer">
+                        <input class="radio" type="radio" id="answer" value="answerValue" name="answer" required>
+                        <span>Indian Ocean</span>
+                        </label>
+                    </li>
+                 </ul>
+                </fieldset> 
+                <button type="submit" class="submit">Submit</button>
+            </form>
+        </section>
+
+        <section class="result"> 
+            <h2>Bravo!</h2> 
+            <h3>You scored: 10/10</h3>
+            <!-- <a href="index.html">Start again!</a> -->
+        </section>
+
+        <section class="feedback">
+            <h3 class="success">Well Done!</h3>
+            <img src="images/giphy-right.gif" alt="" class="success-image"> 
+            <h3 class="failure">Oops!</h3>
+            <img src="images/giphy-wrong.gif" alt="" class="failure-image">
+                  <!-- <a href="results.html">Next</a> -->
+        </section>
+
+    </main>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+<script src="index.js"></script>    
+</body>
+</html>
