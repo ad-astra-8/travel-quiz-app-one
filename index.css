@@ -4,16 +4,26 @@
 
 body {
   /* background-image:url("https://www.wallpaperflare.com/static/47/927/617/beach-holiday-sea-summer-wallpaper.jpg"); */
+  /*  background-image: url("images/taking-off.jpg"); */
   background-size: cover;
   background-repeat: no-repeat;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
+
+}
+
+main {
+ height: 100%;
+ margin: auto;
 }
 
 .container  {
   background:rgba(255, 255, 255, 0.7);
   margin-left: 40px;
+  margin-top:90px;
   margin-right: 40px;
+  border-radius: 3px;
+  
 
 }
 
@@ -23,9 +33,13 @@ body {
   margin-bottom: 40px;
   margin-left: 20px;
   margin-right: 20px;
-  height: 500px;
+  height: 400px;
   text-align: center;
   
+}
+
+.result {
+display: inline-block;
 }
 
 legend {
@@ -36,12 +50,25 @@ legend {
 
 button {
   position: relative;
+  top: 30px;
   width: 100px;
-  height: 30px;
-  background-color: rgb(230, 47, 123);
-  border-style: none;
-  font-size: 14;
+  height: 35px;
+  background-color: green;
+  border-color: black;
+  border-radius: 3px;
+  font-size: 18px;
+  color: white;
   margin-bottom: 20px;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+  margin-bottom: 20px;
+}
+
+div {
+text-align: center; 
+
 }
 
 fieldset {
@@ -54,12 +81,28 @@ h1 {
   padding-top: 30px;
 }
 
+p {
+  font-size: 16px;
+  color: green;
+
+}
 
 ul {
   list-style: none;
   list-style-position: inside;
   display: inline-block;
   text-align: left;
+  height: 40px;;
   padding: 0;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+}
+
+section {
+ text-align: center;
+  
 }
 
