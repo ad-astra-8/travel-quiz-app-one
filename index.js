@@ -236,14 +236,18 @@ function nextQuestion() {
             $('.feedback').html('');
             $('.result').html(''); 
             $('.questions').show();
-            $('.form').replaceWith(templateQuestion(userQuestionNumber)); 
-            // userQuestionNumber++;
-            $('.question-number').text(userQuestionNumber);
+            // $('.form').replaceWith(templateQuestion(userQuestionNumber)); 
+            // // userQuestionNumber++;
+            // $('.question-number').text(userQuestionNumber);
 
-            if (userQuestionNumber == STORE.length){
+            if (userQuestionNumber === STORE.length){
                 finalScore(userQuestionNumber) 
+                console.log("function finalScore", userQuestionNumber);
                 $('.result').show();
                 $(`<button type="button" class="startAgain button">Start Again</button>`).appendTo('.result');
+            }else {
+                $('.form').replaceWith(templateQuestion(userQuestionNumber));
+                $('.question-number').text(userQuestionNumber);
             }
     });   
 }
