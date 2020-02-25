@@ -127,7 +127,7 @@ const STORE = [
 //this function displays what question the user is, also current score.
 let scoreNumber = 0;
 let userQuestionNumber = 0;
-
+let questionNumber = 0;
 
 // this function will allow the user to start the quiz when CLICK START.
 function startQuiz() {
@@ -141,9 +141,10 @@ function startQuiz() {
     });
 }
 
+//CHANGE ON LINE 147
 function updateQuestionAndScore(){
 let board =  $(`
-<p>Question: <span class="question-number">0</span>/10</p>
+<p>Question: <span class="question-number">${questionNumber}</span>/10</p>
 <p>Score: <span class="scoreNumber">${scoreNumber}</span></p>`);
 $('.questionAndScore').html(board);
 }
@@ -182,7 +183,8 @@ function templateQuestion(questionIndex) {
 function handleAnswers() {
     $(document).on('click', '.submit', function (event) {
         event.preventDefault(); 
-        let userQuestionNumber = parseInt( $('.question-number').text());
+        // let userQuestionNumber = parseInt( $('.question-number').text());
+       
         console.log("function handleAnswers", userQuestionNumber);
         let correct = STORE[(userQuestionNumber)].correctAnswer;   
         console.log(correct);
@@ -229,8 +231,9 @@ function handleAnswers() {
 function nextQuestion() {
     $(document).on('click', '.nextButton', function (event) {
         event.preventDefault();
-            let userQuestionNumber = parseInt( $('.question-number').text());
-            userQuestionNumber++;
+            // let userQuestionNumber = parseInt( $('.question-number').text());
+            // userQuestionNumber++;
+            questionNumber++;
             console.log("score number", scoreNumber);
             console.log("function nextQuestion", userQuestionNumber);
             $('.feedback').html('');
