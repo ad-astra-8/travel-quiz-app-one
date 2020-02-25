@@ -127,7 +127,6 @@ const STORE = [
 //this function displays what question the user is, also current score.
 let scoreNumber = 0;
 let userQuestionNumber = 0;
-let questionNumber = 0;
 
 // this function will allow the user to start the quiz when CLICK START.
 function startQuiz() {
@@ -136,15 +135,20 @@ function startQuiz() {
         $('.js-intro').hide();     
         $('.result').hide(); 
         $('.questionAndScore').show();
-        $('.question-number').text();
+        $('.question-number').text(counter);
         templateQuestion(0);
     });
 }
 
-//CHANGE ON LINE 147
+let counter = 1;
+function increaseQuestion(){
+    counter += 1;
+    $('.question-number').text(counter);
+}
+
 function updateQuestionAndScore(){
 let board =  $(`
-<p>Question: <span class="question-number">${questionNumber}</span>/10</p>
+<p>Question: <span class="question-number">${counter}</span>/10</p>
 <p>Score: <span class="scoreNumber">${scoreNumber}</span></p>`);
 $('.questionAndScore').html(board);
 }
@@ -232,15 +236,15 @@ function nextQuestion() {
     $(document).on('click', '.nextButton', function (event) {
         event.preventDefault();
             // let userQuestionNumber = parseInt( $('.question-number').text());
-            // userQuestionNumber++;
-            questionNumber++;
+            userQuestionNumber++;
             console.log("score number", scoreNumber);
             console.log("function nextQuestion", userQuestionNumber);
+            // console.log("increaseQuestionNumber(), after next");
             $('.feedback').html('');
             $('.result').html(''); 
             $('.questions').show();
             // $('.form').replaceWith(templateQuestion(userQuestionNumber)); 
-            // // userQuestionNumber++;
+            //  userQuestionNumber++;
             // $('.question-number').text(userQuestionNumber);
 
             if (userQuestionNumber === STORE.length){
@@ -251,6 +255,8 @@ function nextQuestion() {
             }else {
                 $('.form').replaceWith(templateQuestion(userQuestionNumber));
                 $('.question-number').text(userQuestionNumber);
+                increaseQuestion();
+                // userQuestionNumber++;
             }
     });   
 }
