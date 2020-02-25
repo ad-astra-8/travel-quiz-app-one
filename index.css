@@ -1,69 +1,130 @@
 * {
   box-sizing: border-box;
+  
 }
 
 body {
   /* background-image:url("https://www.wallpaperflare.com/static/47/927/617/beach-holiday-sea-summer-wallpaper.jpg"); */
-  /*  background-image: url("images/taking-off.jpg"); */
-  background-size: cover;
+  background-image: url("images/taking-off.jpg"); 
+  background-size: 100% 120%;
   background-repeat: no-repeat;
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: Geneva, Tahoma, sans-serif;
+  font-size: 16px;
 }
 
 main {
- height: 100%;
- margin: auto;
+ height: 600px;
+ margin-top: 50;
+ margin-bottom: 50;
+ background:rgba(255, 255, 255, 0.8);
+ margin-left: 40px;
+ margin-right: 40px;
+ margin-top:50px;
+ margin-bottom: 50px;
+ border-radius: 3px; 
 }
 
-.container  {
-  background:rgba(255, 255, 255, 0.7);
+header {
+/* padding-top: 10px; */
+}
+
+/* .container  {
+  background:rgba(255, 255, 255, 0.8);
   margin-left: 40px;
-  margin-top:90px;
   margin-right: 40px;
-  border-radius: 3px;
-  
-
-}
+  margin-top:50px;
+  margin-bottom: 50px;
+  border-radius: 3px; 
+} */
 
 .form {
   border: 2px solid black;
-  /*margin-top: 40px;*/
-  margin-bottom: 40px;
+  margin-top: 40px;
+  margin-bottom: 20px;
   margin-left: 20px;
   margin-right: 20px;
-  height: 400px;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  /* height: 400px; */
   text-align: center;
-  
 }
+
+.intro {
+  height: 430px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-bottom: 30px;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .questionAndScore {
+  display: none;
+} */
+
+
 
 .result {
 display: inline-block;
+margin-top: 0px;
+margin-bottom: 20px;
+margin-left: 20px;
+margin-right: 20px;
+padding-top: px;
+padding-bottom: 10px;
+/* height: 400px; */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 }
 
+.black-text {
+  color: black;
+}
+
+
+
 legend {
-  font-size: 35px;
+  font-size: 30px;
   margin-top: 60px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 }
 
 button {
   position: relative;
-  top: 30px;
-  width: 100px;
+  top: 10px;
+  width: 150px;
   height: 35px;
   background-color: green;
   border-color: black;
   border-radius: 3px;
   font-size: 18px;
   color: white;
-  margin-bottom: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
   /* display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; */
-  margin-bottom: 20px;
+}
+
+#start {
+  padding-top: 10px;
+  padding-bottom: 30px;
+
+}
+
+.nextButton {
+  margin-top: 20px;
 }
 
 div {
@@ -81,28 +142,51 @@ h1 {
   padding-top: 30px;
 }
 
-p {
-  font-size: 16px;
-  color: green;
+h2 { 
+  margin-top: 50px;
+}
 
+p {
+  font-size: 18px;
+  color: rgb(4, 90, 4); 
+  font-weight: 700;
 }
 
 ul {
   list-style: none;
   list-style-position: inside;
+  line-height: 35px;
+  font-size: 16px;
   display: inline-block;
-  text-align: left;
+  text-align: justify;
   height: 40px;;
   padding: 0;
 }
 
 img {
-  width: 200px;
+  width: 300px;
   height: 200px;
+  border: solid white 2px;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+
+.map-icon {
+  width: 60px;
+  height: 50px;
+  filter: contrast(1.60);
+}
+
+.globe {
+  width: 190px;
+  height: 150px;
 }
 
 section {
+
  text-align: center;
+
+
   
 }
 

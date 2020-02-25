@@ -24,7 +24,7 @@ const STORE = [
             'Sicily'
         ],
         correctAnswer:
-            ' Rome'
+            'Rome'
     },
     {
         //3 [2]
@@ -48,7 +48,7 @@ const STORE = [
             'Reykjavik'
         ],
         correctAnswer:
-            'Moscow '
+            'Moscow'
     },
     {
         //5 [4]
@@ -83,6 +83,8 @@ const STORE = [
             'Scotland',
             'Egypt'
         ],
+        correctAnswer:
+            'Mexico'
     },
     {
         //8 [7]
@@ -124,22 +126,32 @@ const STORE = [
 
 //this function displays what question the user is, also current score.
 let scoreNumber = 0;
-let questionNumber = 0;
+let userQuestionNumber = 0;
+
 
 // this function will allow the user to start the quiz when CLICK START.
 function startQuiz() {
-    $('#start').on('click', function (event) {
+    $(document).on('click', '.start', function (event) {
+        console.log("function startQuiz", userQuestionNumber);
+        $('.js-intro').hide();     
+        $('.result').hide(); 
+        $('.questionAndScore').show();
+        $('.question-number').text();
         templateQuestion(0);
-        $('.js-intro').hide();
-        $('.questionNumber').text(questionNumber);
-        $('.questions').show();
     });
 }
 
+function updateQuestionAndScore(){
+let board =  $(`
+<p>Question: <span class="question-number">0</span>/10</p>
+<p>Score: <span class="scoreNumber">${scoreNumber}</span></p>`);
+$('.questionAndScore').html(board);
+}
 
 //this function should display the structure of the the questions form.
 function templateQuestion(questionIndex) {
-   
+    console.log("function templateQuestion", questionIndex);
+    updateQuestionAndScore();
     let questionForm = $(`
     <form class="form">           
         <fieldset>   
@@ -162,26 +174,7 @@ function templateQuestion(questionIndex) {
     $(`<div class="block-button"><button type="submit" class="submit">Go</button></div>`).appendTo(formSection);
     $('.questions').append(questionForm);
     $('.questions').show();
-}
-
-function goodAnswer() {
-    let isRight = $(`<h3 class="success">Bravo!</h3>
-        <img src="images/giphy-right.gif" alt="happy flight attendants" class="success-image"> 
-        <button type="button" class="nextButton button">Next</button>`)
-    $('.feedback').html(isRight);
-
-    scoreNumber++;
-    $('.scoreNumber').text(scoreNumber);
-    $('.questions').hide();
-}
-
-function wrongAnswer() {
-    let isWrong = $(`<h3 class="failure">Oops!</h3>
-        <p>The correct answer was: ${STORE[questionNumber].correctAnswer}</p>
-            <img src="images/giphy-wrong.gif" alt="flight attendants saying no" class="failure-image"></img>
-            <button type="button" class="nextButton button">Next</button>`)
-    $('.feedback').html(isWrong);
-    $('.questions').hide();
+    $('.result').hide(); 
 }
 
 // Upon CLICK on SUBMIT, this function will display TEXTUAL + VISUAL feedback. 
@@ -189,14 +182,36 @@ function wrongAnswer() {
 function handleAnswers() {
     $(document).on('click', '.submit', function (event) {
         event.preventDefault(); 
-        let questionNumber = parseInt( $('.questionNumber').text());
-        console.log(questionNumber);
-        // console.log('hello');
-        //$('.feedback').show();
-        let correct = STORE[questionNumber].correctAnswer;
-        //console.log(correct);
-        let answer = $("input[class='radio']:checked").val();
-        //console.log(answer);
+        let userQuestionNumber = parseInt( $('.question-number').text());
+        console.log("function handleAnswers", userQuestionNumber);
+        let correct = STORE[(userQuestionNumber)].correctAnswer;   
+        console.log(correct);
+     
+        
+        function wrongAnswer() {
+            let isWrong = 
+            $(`<h3 class="failure">Oops!</h3>
+                <p>The correct answer was: \"${STORE[userQuestionNumber].correctAnswer}\"</p>
+                <div class="gif-container"><img src="images/giphy-wrong.gif" alt="flight attendants saying no"></div>
+                <button type="button" class="nextButton button">Next</button>`)
+            console.log(STORE[(userQuestionNumber)].correctAnswer);
+            $('.feedback').html(isWrong); 
+            $('.questions').hide(); 
+        }
+
+        function goodAnswer() {
+            let isRight = $(`<h3>Bravo!</h3>
+            <div class="gif-container"><img src="images/giphy-right.gif" alt="happy flight attendants"></div> 
+            <button type="button" class="nextButton button">Next</button>`)
+            $('.feedback').html(isRight);
+        
+            scoreNumber++;
+            $('.scoreNumber').text(scoreNumber);
+            $('.questions').hide();
+        }
+
+         let answer = $("input[class='radio']:checked").val();
+        console.log(answer);
         if (answer == correct) {
             goodAnswer();
         } else if (answer == undefined) {
@@ -205,7 +220,7 @@ function handleAnswers() {
             wrongAnswer();
         }
         $('.feedback').show();
-        nextQuestion();
+        // nextQuestion();
     });
 }
 
@@ -214,64 +229,77 @@ function handleAnswers() {
 function nextQuestion() {
     $(document).on('click', '.nextButton', function (event) {
         event.preventDefault();
-        let questionNumber = parseInt( $('.questionNumber').text());
-      //  console.log(questionNumber);
-        $('.feedback').html('');
-        $('.questions').show();
-        $('.form').replaceWith(templateQuestion(questionNumber)); 
-        questionNumber++;
-        $('.questionNumber').text(questionNumber);
-        //handleAnswers(questionNumber);
-    });
-}
+            let userQuestionNumber = parseInt( $('.question-number').text());
+            userQuestionNumber++;
+            console.log("score number", scoreNumber);
+            console.log("function nextQuestion", userQuestionNumber);
+            $('.feedback').html('');
+            $('.result').html(''); 
+            $('.questions').show();
+            $('.form').replaceWith(templateQuestion(userQuestionNumber)); 
+            // userQuestionNumber++;
+            $('.question-number').text(userQuestionNumber);
 
-//this function generate overall score and feedback at the end of the quiz.
-function excellent() {
-    let moreThanAverage =
-        $(`<h3 class="moreThanAverage">The world is yours!</h3> 
-    <img src="images/giphy-nice-job.gif" alt="globe-spinning" class="success-image">`)
-    $('.result').append(moreThanAverage);
+            if (userQuestionNumber == STORE.length){
+                finalScore(userQuestionNumber) 
+                $('.result').show();
+                $(`<button type="button" class="startAgain button">Start Again</button>`).appendTo('.result');
+            }
+    });   
 }
-function notTooBad() {
-    let average =
-        $(`<h3 class="average">Hey, Not bad!</h3> 
-    <img src="images/destinations.jpg" alt="airport departure board" class="success-image">`)
-    $('.result').append(average);
-}
-function notSoGood() {
-    let lessThanAverage =
-        $(`<h3 class="lessThanAverage">You'll do better next time!</h3> 
-    <img src="images/denied.jpg" alt="rainy day" class="success-image">`)
-    $('.result').append(lessThanAverage);
-}
+           
+// this function generate overall score and feedback at the end of the quiz.
 
-function finalScore() {
-    console.log('finalScore() activated');
+        function finalScore(userQuestionNumber) {
+            console.log("function finalScore", userQuestionNumber);
+                
+                console.log('score number', scoreNumber);
+            
+                let moreThanAverage =
+                    $(`<h3 class="moreThanAverage">The world is yours!</h3> 
+                <img src="images/giphy-nice-job.gif" alt="spinning globe" class="globe">`)
+                $('.result').html(moreThanAverage);
+               
+            
+        
+                let average =
+                    $(`<h3 class="average">Hey! Not bad!</h3> 
+                <img src="images/destinations.jpg" alt="destinations and directions signs">`)
+                $('.result').html(average);
+            
+            
+             
+                let lessThanAverage =
+                    $(`<h3 class="lessThanAverage">You'll do better next time!</h3> 
+                <img src="images/denied.jpg" alt="denied stamped passport">`)
+                $('.result').html(lessThanAverage); 
 
-    if (score >= 8) {
-        excellent()
-    } else if (score >= 5) {
-        notTooBad()
-    } else {
-        notSoGood()
-    }
-    $('.result').show();
-    $(`<button type="button" class="startAgain button">Start Again</button>`).appendTo('.result');
-}
+            
+                $('.questions').hide();
+                $('.feedback').hide();
+                $('.result').show();
+                $(`<button type="button" class="startAgain button">Start Again</button>`).appendTo('.result');
+                
+                if  (scoreNumber >= 8) {
+                $('.result').html(moreThanAverage); 
+                } else if (scoreNumber >= 5) {
+                $('.result').html(average); 
+                } else if (scoreNumber <= 4){
+                $('.result').html(lessThanAverage); 
+                }
+        }
 
 //this function bring back that starting page when CLICK START AGAIN.
 function restartQuiz() {
     $(document).on('click', '.startAgain', function (event) {  
         event.preventDefault();
+        console.log("function restartQuiz", userQuestionNumber);
         templateQuestion(0);
+        $('.form').replaceWith(templateQuestion(userQuestionNumber)); 
         scoreNumber = 0;
         $('.scoreNumber').text(scoreNumber);
-        $('.questionNumber').text(questionNumber);
-        $('.questions').show();
-        $('.result').hide();
     });
 }
-
 
 //this is the callback function
 function handleQuiz() {
