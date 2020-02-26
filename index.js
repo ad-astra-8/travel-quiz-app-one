@@ -270,24 +270,23 @@ function nextQuestion() {
             
                 let moreThanAverage =
                     $(`<h3 class="moreThanAverage">The world is yours!</h3> 
-                <img src="images/giphy-nice-job.gif" alt="spinning globe" class="globe">`)
+                <img src="images/giphy-nice-job.gif" alt="spinning globe" class="globe">
+                <p>You scored: <span class="scoreNumber">${scoreNumber}</span> out of 10</p>`)
                 $('.result').html(moreThanAverage);
                
-            
-        
                 let average =
                     $(`<h3 class="average">Hey! Not bad!</h3> 
-                <img src="images/destinations.jpg" alt="destinations and directions signs">`)
+                <img src="images/destinations.jpg" alt="destinations and directions signs">
+                <p>You scored: <span class="scoreNumber">${scoreNumber}</span> out of 10</p>`)
                 $('.result').html(average);
             
-            
-             
                 let lessThanAverage =
                     $(`<h3 class="lessThanAverage">You'll do better next time!</h3> 
-                <img src="images/denied.jpg" alt="denied stamped passport">`)
+                <img src="images/denied.jpg" alt="denied stamped passport">
+                <p>You scored: <span class="scoreNumber">${scoreNumber}</span> out of 10</p>`)
                 $('.result').html(lessThanAverage); 
 
-            
+                $('.questionAndScore').hide();
                 $('.questions').hide();
                 $('.feedback').hide();
                 $('.result').show();
@@ -307,10 +306,14 @@ function restartQuiz() {
     $(document).on('click', '.startAgain', function (event) {  
         event.preventDefault();
         console.log("function restartQuiz", userQuestionNumber);
-        templateQuestion(0);
-        $('.form').replaceWith(templateQuestion(userQuestionNumber)); 
-        scoreNumber = 0;
+        userQuestionNumber = 0;
+        scoreNumber = 0; 
         $('.scoreNumber').text(scoreNumber);
+        counter = 1;
+        $('.question-number').text(counter);
+        $('.questionAndScore').show();
+        $('.result').html('');
+        $('.form').replaceWith(templateQuestion(userQuestionNumber)); 
     });
 }
 

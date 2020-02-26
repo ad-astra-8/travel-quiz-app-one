@@ -1,12 +1,10 @@
 * {
   box-sizing: border-box;
-  
 }
 
 body {
-  /* background-image:url("https://www.wallpaperflare.com/static/47/927/617/beach-holiday-sea-summer-wallpaper.jpg"); */
-  background-image: url("images/taking-off.jpg"); 
-  background-size: 100% 120%;
+  background-image: url("images/Airplane-Take-Off-Wallpaper.jpg");
+  background-size: contain;
   background-repeat: no-repeat;
   text-align: center;
   /* font-family: Arial, Helvetica, sans-serif; */
@@ -25,19 +23,6 @@ main {
  margin-bottom: 50px;
  border-radius: 3px; 
 }
-
-header {
-/* padding-top: 10px; */
-}
-
-/* .container  {
-  background:rgba(255, 255, 255, 0.8);
-  margin-left: 40px;
-  margin-right: 40px;
-  margin-top:50px;
-  margin-bottom: 50px;
-  border-radius: 3px; 
-} */
 
 .form {
   border: 2px solid black;
@@ -63,12 +48,6 @@ header {
   align-items: center;
 }
 
-/* .questionAndScore {
-  display: none;
-} */
-
-
-
 .result {
 display: inline-block;
 margin-top: 0px;
@@ -88,8 +67,6 @@ align-items: center;
   color: black;
 }
 
-
-
 legend {
   font-size: 30px;
   margin-top: 60px;
@@ -101,7 +78,7 @@ button {
   top: 10px;
   width: 150px;
   height: 35px;
-  background-color: green;
+  background-color: rgb(4, 90, 4);
   border-color: black;
   border-radius: 3px;
   font-size: 18px;
@@ -110,11 +87,6 @@ button {
   margin-bottom: 30px;
   padding-top: 10px;
   padding-bottom: 30px;
-}
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
 }
 
 #start {
@@ -125,11 +97,6 @@ button {
 
 .nextButton {
   margin-top: 20px;
-}
-
-div {
-text-align: center; 
-
 }
 
 fieldset {
@@ -147,7 +114,7 @@ h2 {
 }
 
 p {
-  font-size: 18px;
+  font-size: 19px;
   color: rgb(4, 90, 4); 
   font-weight: 700;
 }
@@ -156,7 +123,7 @@ ul {
   list-style: none;
   list-style-position: inside;
   line-height: 35px;
-  font-size: 16px;
+  font-size: 17px;
   display: inline-block;
   text-align: justify;
   height: 40px;;
@@ -183,10 +150,43 @@ img {
 }
 
 section {
-
  text-align: center;
+}
 
+@media only screen and (min-width: 320px) {
+  body{
+  background-size: 100% 110%;
+  }
 
-  
+  legend {
+    font-size: 20px;
+  }
+
+  img {
+    width: 180px;
+    height: 140px;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  legend {
+    font-size: 25px;
+  }
+
+  img {
+    width: 200px;
+    height: 150px;
+  }
+}
+
+@media only screen and (min-width: 568px) {
+  legend {
+    font-size: 30px;
+  }
+
+  img {
+  width: 300px;
+  height: 200px;
+  }
 }
 
