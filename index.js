@@ -131,7 +131,7 @@ let userQuestionNumber = 0;
 // this function will allow the user to start the quiz when CLICK START.
 function startQuiz() {
     $(document).on('click', '.start', function (event) {
-        console.log("function startQuiz", userQuestionNumber);
+        // console.log("function startQuiz", userQuestionNumber);
         $('.js-intro').hide();     
         $('.result').hide(); 
         $('.questionAndScore').show();
@@ -155,7 +155,7 @@ $('.questionAndScore').html(board);
 
 //this function should display the structure of the the questions form.
 function templateQuestion(questionIndex) {
-    console.log("function templateQuestion", questionIndex);
+    // console.log("function templateQuestion", questionIndex);
     updateQuestionAndScore();
     let questionForm = $(`
     <form class="form">           
@@ -187,11 +187,9 @@ function templateQuestion(questionIndex) {
 function handleAnswers() {
     $(document).on('click', '.submit', function (event) {
         event.preventDefault(); 
-        // let userQuestionNumber = parseInt( $('.question-number').text());
-       
-        console.log("function handleAnswers", userQuestionNumber);
+        // console.log("function handleAnswers", userQuestionNumber);
         let correct = STORE[(userQuestionNumber)].correctAnswer;   
-        console.log(correct);
+        // console.log(correct);
      
         
         function wrongAnswer() {
@@ -200,7 +198,7 @@ function handleAnswers() {
                 <p>The correct answer was: \"${STORE[userQuestionNumber].correctAnswer}\"</p>
                 <div class="gif-container"><img src="images/giphy-wrong.gif" alt="flight attendants saying no"></div>
                 <button type="button" class="nextButton button">Next</button>`)
-            console.log(STORE[(userQuestionNumber)].correctAnswer);
+            // console.log(STORE[(userQuestionNumber)].correctAnswer);
             $('.feedback').html(isWrong); 
             $('.questions').hide(); 
         }
@@ -210,23 +208,21 @@ function handleAnswers() {
             <div class="gif-container"><img src="images/giphy-right.gif" alt="happy flight attendants"></div> 
             <button type="button" class="nextButton button">Next</button>`)
             $('.feedback').html(isRight);
-        
             scoreNumber++;
             $('.scoreNumber').text(scoreNumber);
             $('.questions').hide();
         }
 
-         let answer = $("input[class='radio']:checked").val();
-        console.log(answer);
-        if (answer == correct) {
+        let answer = $("input[class='radio']:checked").val();
+            // console.log(answer);
+            if (answer == correct) {
             goodAnswer();
-        } else if (answer == undefined) {
+            } else if (answer == undefined) {
             alert('Please choose an option!');
-        } else {
+            } else {
             wrongAnswer();
-        }
-        $('.feedback').show();
-        // nextQuestion();
+            }
+            $('.feedback').show();
     });
 }
 
@@ -235,38 +231,32 @@ function handleAnswers() {
 function nextQuestion() {
     $(document).on('click', '.nextButton', function (event) {
         event.preventDefault();
-            // let userQuestionNumber = parseInt( $('.question-number').text());
             userQuestionNumber++;
-            console.log("score number", scoreNumber);
-            console.log("function nextQuestion", userQuestionNumber);
+            // console.log("score number", scoreNumber);
+            // console.log("function nextQuestion", userQuestionNumber);
             // console.log("increaseQuestionNumber(), after next");
             $('.feedback').html('');
             $('.result').html(''); 
             $('.questions').show();
-            // $('.form').replaceWith(templateQuestion(userQuestionNumber)); 
-            //  userQuestionNumber++;
-            // $('.question-number').text(userQuestionNumber);
-
+           
             if (userQuestionNumber === STORE.length){
                 finalScore(userQuestionNumber) 
-                console.log("function finalScore", userQuestionNumber);
+                // console.log("function finalScore", userQuestionNumber);
                 $('.result').show();
                 $(`<button type="button" class="startAgain button">Start Again</button>`).appendTo('.result');
             }else {
                 $('.form').replaceWith(templateQuestion(userQuestionNumber));
                 $('.question-number').text(userQuestionNumber);
                 increaseQuestion();
-                // userQuestionNumber++;
             }
     });   
 }
            
 // this function generate overall score and feedback at the end of the quiz.
-
         function finalScore(userQuestionNumber) {
-            console.log("function finalScore", userQuestionNumber);
+            // console.log("function finalScore", userQuestionNumber);
                 
-                console.log('score number', scoreNumber);
+                // console.log('score number', scoreNumber);
             
                 let moreThanAverage =
                     $(`<h3 class="moreThanAverage">The world is yours!</h3> 
@@ -305,7 +295,7 @@ function nextQuestion() {
 function restartQuiz() {
     $(document).on('click', '.startAgain', function (event) {  
         event.preventDefault();
-        console.log("function restartQuiz", userQuestionNumber);
+        // console.log("function restartQuiz", userQuestionNumber);
         userQuestionNumber = 0;
         scoreNumber = 0; 
         $('.scoreNumber').text(scoreNumber);
