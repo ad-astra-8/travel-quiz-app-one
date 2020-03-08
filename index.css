@@ -86,12 +86,12 @@ button {
   margin-bottom: 30px;
   padding-top: 10px;
   padding-bottom: 30px;
+  cursor: pointer;
 }
 
 #start {
   padding-top: 10px;
   padding-bottom: 30px;
-
 }
 
 .nextButton {
@@ -150,6 +150,14 @@ img {
 
 section {
  text-align: center;
+}
+
+label {
+  cursor: pointer;
+}
+
+input {
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 320px) {
