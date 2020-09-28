@@ -124,6 +124,8 @@ const STORE = [
     },
 ];
 
+// Define Global Variables 
+
 //this function displays what question the user is, also current score.
 let scoreNumber = 0;
 let userQuestionNumber = 0;
@@ -132,8 +134,8 @@ let userQuestionNumber = 0;
 function startQuiz() {
     $(document).on('click', '.start', function (event) {
         // console.log("function startQuiz", userQuestionNumber);
-        $('.js-intro').hide();     
-        $('.result').hide(); 
+        $('.js-intro').hide();
+        $('.result').hide();
         $('.questionAndScore').show();
         $('.question-number').text(counter);
         templateQuestion(0);
@@ -141,16 +143,16 @@ function startQuiz() {
 }
 
 let counter = 1;
-function increaseQuestion(){
+function increaseQuestion() {
     counter += 1;
     $('.question-number').text(counter);
 }
 
-function updateQuestionAndScore(){
-let board =  $(`
+function updateQuestionAndScore() {
+    let board = $(`
 <p>Question: <span class="question-number">${counter}</span>/10</p>
 <p>Score: <span class="scoreNumber">${scoreNumber}</span></p>`);
-$('.questionAndScore').html(board);
+    $('.questionAndScore').html(board);
 }
 
 //this function should display the structure of the the questions form.
@@ -179,28 +181,28 @@ function templateQuestion(questionIndex) {
     $(`<div class="block-button"><button type="submit" class="submit">Go</button></div>`).appendTo(formSection);
     $('.questions').append(questionForm);
     $('.questions').show();
-    $('.result').hide(); 
+    $('.result').hide();
 }
 
 // Upon CLICK on SUBMIT, this function will display TEXTUAL + VISUAL feedback. 
 // IF incorrect, will DISPLAY correct answer.
 function handleAnswers() {
     $(document).on('click', '.submit', function (event) {
-        event.preventDefault(); 
+        event.preventDefault();
         // console.log("function handleAnswers", userQuestionNumber);
-        let correct = STORE[(userQuestionNumber)].correctAnswer;   
+        let correct = STORE[(userQuestionNumber)].correctAnswer;
         // console.log(correct);
-     
-        
+
+
         function wrongAnswer() {
-            let isWrong = 
-            $(`<h3 class="failure">Oops!</h3>
+            let isWrong =
+                $(`<h3 class="failure">Oops!</h3>
                 <p>The correct answer was: \"${STORE[userQuestionNumber].correctAnswer}\"</p>
                 <div class="gif-container"><img src="images/giphy-wrong.gif" alt="flight attendants saying no"></div>
                 <button type="button" class="nextButton button">Next</button>`)
             // console.log(STORE[(userQuestionNumber)].correctAnswer);
-            $('.feedback').html(isWrong); 
-            $('.questions').hide(); 
+            $('.feedback').html(isWrong);
+            $('.questions').hide();
         }
 
         function goodAnswer() {
@@ -214,15 +216,15 @@ function handleAnswers() {
         }
 
         let answer = $("input[class='radio']:checked").val();
-            // console.log(answer);
-            if (answer == correct) {
+        // console.log(answer);
+        if (answer == correct) {
             goodAnswer();
-            } else if (answer == undefined) {
+        } else if (answer == undefined) {
             alert('Please choose an option!');
-            } else {
+        } else {
             wrongAnswer();
-            }
-            $('.feedback').show();
+        }
+        $('.feedback').show();
     });
 }
 
@@ -231,79 +233,78 @@ function handleAnswers() {
 function nextQuestion() {
     $(document).on('click', '.nextButton', function (event) {
         event.preventDefault();
-            userQuestionNumber++;
-            // console.log("score number", scoreNumber);
-            // console.log("function nextQuestion", userQuestionNumber);
-            // console.log("increaseQuestionNumber(), after next");
-            $('.feedback').html('');
-            $('.result').html(''); 
-            $('.questions').show();
-           
-            if (userQuestionNumber === STORE.length){
-                finalScore(userQuestionNumber) 
-                // console.log("function finalScore", userQuestionNumber);
-                $('.result').show();
-                $(`<button type="button" class="startAgain button">Start Again</button>`).appendTo('.result');
-            }else {
-                $('.form').replaceWith(templateQuestion(userQuestionNumber));
-                $('.question-number').text(userQuestionNumber);
-                increaseQuestion();
-            }
-    });   
-}
-           
-// this function generate overall score and feedback at the end of the quiz.
-        function finalScore(userQuestionNumber) {
+        userQuestionNumber++;
+        // console.log("score number", scoreNumber);
+        // console.log("function nextQuestion", userQuestionNumber);
+        // console.log("increaseQuestionNumber(), after next");
+        $('.feedback').html('');
+        $('.result').html('');
+        $('.questions').show();
+
+        if (userQuestionNumber === STORE.length) {
+            finalScore(userQuestionNumber)
             // console.log("function finalScore", userQuestionNumber);
-                
-                // console.log('score number', scoreNumber);
-            
-                let moreThanAverage =
-                    $(`<h3 class="moreThanAverage">The world is yours!</h3> 
+            $('.result').show();
+            $(`<button type="button" class="startAgain button">Start Again</button>`).appendTo('.result');
+        } else {
+            $('.form').replaceWith(templateQuestion(userQuestionNumber));
+            $('.question-number').text(userQuestionNumber);
+            increaseQuestion();
+        }
+    });
+}
+
+// this function generate overall score and feedback at the end of the quiz.
+function finalScore(userQuestionNumber) {
+    // console.log("function finalScore", userQuestionNumber);
+    // console.log('score number', scoreNumber);
+
+    let moreThanAverage =
+        $(`<h3 class="moreThanAverage">The world is yours!</h3> 
                 <img src="images/giphy-nice-job.gif" alt="spinning globe" class="globe">
                 <p>You scored: <span class="scoreNumber">${scoreNumber}</span> out of 10</p>`)
-                $('.result').html(moreThanAverage);
-               
-                let average =
-                    $(`<h3 class="average">Hey! Not bad!</h3> 
+    $('.result').html(moreThanAverage);
+
+    let average =
+        $(`<h3 class="average">Hey! Not bad!</h3> 
                 <img src="images/destinations.jpg" alt="destinations and directions signs">
                 <p>You scored: <span class="scoreNumber">${scoreNumber}</span> out of 10</p>`)
-                $('.result').html(average);
-            
-                let lessThanAverage =
-                    $(`<h3 class="lessThanAverage">You'll do better next time!</h3> 
+    $('.result').html(average);
+
+    let lessThanAverage =
+        $(`<h3 class="lessThanAverage">You'll do better next time!</h3> 
                 <img src="images/denied.jpg" alt="denied stamped passport">
                 <p>You scored: <span class="scoreNumber">${scoreNumber}</span> out of 10</p>`)
-                $('.result').html(lessThanAverage); 
+    $('.result').html(lessThanAverage);
 
-                $('.questionAndScore').hide();
-                $('.questions').hide();
-                $('.feedback').hide();
-                $('.result').show();
-                $(`<button type="button" class="startAgain button">Start Again</button>`).appendTo('.result');
-                
-                if  (scoreNumber >= 8) {
-                $('.result').html(moreThanAverage); 
-                } else if (scoreNumber >= 5) {
-                $('.result').html(average); 
-                } else if (scoreNumber <= 4){
-                $('.result').html(lessThanAverage); 
-                }
-        }
+    $('.questionAndScore').hide();
+    $('.questions').hide();
+    $('.feedback').hide();
+    $('.result').show();
+    $(`<button type="button" class="startAgain button">Start Again</button>`).appendTo('.result');
+
+    if (scoreNumber >= 8) {
+        $('.result').html(moreThanAverage);
+    } else if (scoreNumber >= 5) {
+        $('.result').html(average);
+    } else if (scoreNumber <= 4) {
+        $('.result').html(lessThanAverage);
+    }
+}
 
 //this function bring back that starting page when CLICK START AGAIN.
 function restartQuiz() {
-    $(document).on('click', '.startAgain', function (event) {  
+    $(document).on('click', '.startAgain', function (event) {
         event.preventDefault();
         // console.log("function restartQuiz", userQuestionNumber);
         userQuestionNumber = 0;
-        scoreNumber = 0; 
+        scoreNumber = 0;
         $('.scoreNumber').text(scoreNumber);
         counter = 1;
         $('.question-number').text(counter);
         $('.questionAndScore').show();
         $('.result').html('');
-        $('.form').replaceWith(templateQuestion(userQuestionNumber)); 
+        $('.form').replaceWith(templateQuestion(userQuestionNumber));
     });
 }
 

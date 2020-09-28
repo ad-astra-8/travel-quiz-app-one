@@ -12,15 +12,15 @@ body {
 }
 
 main {
- height: 600px;
- margin-top: 50;
- margin-bottom: 50;
- background:rgba(255, 255, 255, 0.8);
- margin-left: 40px;
- margin-right: 40px;
- margin-top:50px;
- margin-bottom: 50px;
- border-radius: 3px; 
+  height: 600px;
+  margin-top: 50;
+  margin-bottom: 50;
+  background:rgba(255, 255, 255, 0.8);
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top:50px;
+  margin-bottom: 50px;
+  border-radius: 3px; 
 }
 
 .form {
@@ -48,18 +48,18 @@ main {
 }
 
 .result {
-display: inline-block;
-margin-top: 0px;
-margin-bottom: 20px;
-margin-left: 20px;
-margin-right: 20px;
-padding-top: px;
-padding-bottom: 10px;
-/* height: 400px; */
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+  display: inline-block;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-top: px;
+  padding-bottom: 10px;
+  /* height: 400px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .black-text {
