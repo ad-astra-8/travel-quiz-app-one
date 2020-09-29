@@ -1,5 +1,8 @@
 'use strict';
 
+//////  Define Global Variables   ///////
+
+
 //question database
 const STORE = [
     {
@@ -124,13 +127,24 @@ const STORE = [
     },
 ];
 
-// Define Global Variables 
-
-//this function displays what question the user is, also current score.
+//displays what question the user is, also current score.
 let scoreNumber = 0;
 let userQuestionNumber = 0;
+let counter = 1;
 
-// this function will allow the user to start the quiz when CLICK START.
+
+
+
+//////  Define Functions   ///////
+
+
+//increases the counter for questions and will show on the DOM
+function increaseQuestion() {
+    counter += 1;
+    $('.question-number').text(counter);
+}
+
+//allows the user to start the quiz when CLICK START.
 function startQuiz() {
     $(document).on('click', '.start', function (event) {
         // console.log("function startQuiz", userQuestionNumber);
@@ -142,31 +156,26 @@ function startQuiz() {
     });
 }
 
-let counter = 1;
-function increaseQuestion() {
-    counter += 1;
-    $('.question-number').text(counter);
-}
-
+//updates the player's score and renders it to the DOM
 function updateQuestionAndScore() {
     let board = $(`
-<p>Question: <span class="question-number">${counter}</span>/10</p>
-<p>Score: <span class="scoreNumber">${scoreNumber}</span></p>`);
+        <p>Question: <span class="question-number">${counter}</span>/10</p>
+        <p>Score: <span class="scoreNumber">${scoreNumber}</span></p>`);
     $('.questionAndScore').html(board);
 }
 
-//this function should display the structure of the the questions form.
+//displays the structure of the the questions form.
 function templateQuestion(questionIndex) {
     // console.log("function templateQuestion", questionIndex);
     updateQuestionAndScore();
     let questionForm = $(`
-    <form class="form">           
-        <fieldset>   
-            <legend class="question">${STORE[questionIndex].question}</legend>
-            <ul></ul>
-        </fieldset> 
-    </form>
-`)
+        <form class="form">           
+            <fieldset>   
+                <legend class="question">${STORE[questionIndex].question}</legend>
+                <ul></ul>
+            </fieldset> 
+        </form>
+    `)
 
     let formSection = $(questionForm).find('ul');
 
@@ -184,7 +193,30 @@ function templateQuestion(questionIndex) {
     $('.result').hide();
 }
 
-// Upon CLICK on SUBMIT, this function will display TEXTUAL + VISUAL feedback. 
+//displays result to the answer and image corresponding to wrong answer
+function wrongAnswer() {
+    let isWrong =
+        $(`<h3 class="failure">Oops!</h3>
+        <p>The correct answer was: \"${STORE[userQuestionNumber].correctAnswer}\"</p>
+        <div class="gif-container"><img src="images/giphy-wrong.gif" alt="flight attendants saying no"></div>
+        <button type="button" class="nextButton button">Next</button>`)
+    // console.log(STORE[(userQuestionNumber)].correctAnswer);
+    $('.feedback').html(isWrong);
+    $('.questions').hide();
+}
+
+//displays result to the answer and image corresponding to right answer
+function goodAnswer() {
+    let isRight = $(`<h3>Bravo!</h3>
+    <div class="gif-container"><img src="images/giphy-right.gif" alt="happy flight attendants"></div> 
+    <button type="button" class="nextButton button">Next</button>`)
+    $('.feedback').html(isRight);
+    scoreNumber++;
+    $('.scoreNumber').text(scoreNumber);
+    $('.questions').hide();
+}
+
+// Upon CLICK on SUBMIT, displays TEXTUAL + VISUAL feedback. 
 // IF incorrect, will DISPLAY correct answer.
 function handleAnswers() {
     $(document).on('click', '.submit', function (event) {
@@ -194,26 +226,6 @@ function handleAnswers() {
         // console.log(correct);
 
 
-        function wrongAnswer() {
-            let isWrong =
-                $(`<h3 class="failure">Oops!</h3>
-                <p>The correct answer was: \"${STORE[userQuestionNumber].correctAnswer}\"</p>
-                <div class="gif-container"><img src="images/giphy-wrong.gif" alt="flight attendants saying no"></div>
-                <button type="button" class="nextButton button">Next</button>`)
-            // console.log(STORE[(userQuestionNumber)].correctAnswer);
-            $('.feedback').html(isWrong);
-            $('.questions').hide();
-        }
-
-        function goodAnswer() {
-            let isRight = $(`<h3>Bravo!</h3>
-            <div class="gif-container"><img src="images/giphy-right.gif" alt="happy flight attendants"></div> 
-            <button type="button" class="nextButton button">Next</button>`)
-            $('.feedback').html(isRight);
-            scoreNumber++;
-            $('.scoreNumber').text(scoreNumber);
-            $('.questions').hide();
-        }
 
         let answer = $("input[class='radio']:checked").val();
         // console.log(answer);
@@ -228,7 +240,7 @@ function handleAnswers() {
     });
 }
 
-//this function generates the next question when user CLICK on button "NEXT"
+//generates the next question when user CLICK on button "NEXT"
 //and render the next question on the form
 function nextQuestion() {
     $(document).on('click', '.nextButton', function (event) {
@@ -254,7 +266,7 @@ function nextQuestion() {
     });
 }
 
-// this function generate overall score and feedback at the end of the quiz.
+//generates overall score and feedback at the end of the quiz.
 function finalScore(userQuestionNumber) {
     // console.log("function finalScore", userQuestionNumber);
     // console.log('score number', scoreNumber);
@@ -292,7 +304,7 @@ function finalScore(userQuestionNumber) {
     }
 }
 
-//this function bring back that starting page when CLICK START AGAIN.
+//brings back that starting page when CLICK START AGAIN.
 function restartQuiz() {
     $(document).on('click', '.startAgain', function (event) {
         event.preventDefault();
@@ -307,6 +319,12 @@ function restartQuiz() {
         $('.form').replaceWith(templateQuestion(userQuestionNumber));
     });
 }
+
+
+
+
+//////  uses the functions   ///////
+
 
 //this is the callback function
 function handleQuiz() {
